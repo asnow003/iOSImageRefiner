@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Image Edit-->
+        <scene sceneID="LdD-wd-BzO">
+            <objects>
+                <viewController storyboardIdentifier="ImageEdit" automaticallyAdjustsScrollViewInsets="NO" id="WSV-Ek-hR6" customClass="ImageEdit" customModule="iOS_Image_Refiner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Z6Z-Pu-hNG"/>
+                        <viewControllerLayoutGuide type="bottom" id="0UC-lr-Nyo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UJG-pq-JkW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6lQ-pQ-ECM">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="WSV-Ek-hR6" id="65f-4m-VkT"/>
+                                </connections>
+                            </scrollView>
+                            <view userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-Ju-wL9" customClass="ViewWithCutout" customModule="iOS_Image_Refiner" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="AUn-ol-K80">
+                                        <rect key="frame" x="177" y="323" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="AUn-ol-K80" firstAttribute="centerY" secondItem="tiQ-Ju-wL9" secondAttribute="centerY" id="438-BB-Sq8"/>
+                                    <constraint firstItem="AUn-ol-K80" firstAttribute="centerX" secondItem="tiQ-Ju-wL9" secondAttribute="centerX" id="cIb-ho-YI2"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecG-eu-Ocg" userLabel="Button Bar">
+                                <rect key="frame" x="0.0" y="580" width="375" height="87"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8H-KA-w4b" userLabel="Ok Button">
+                                        <rect key="frame" x="319" y="30" width="26" height="26"/>
+                                        <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="Ok"/>
+                                        <connections>
+                                            <action selector="okButtonClick:" destination="WSV-Ek-hR6" eventType="touchUpInside" id="wdf-WG-cPf"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m7H-4m-kUW" userLabel="Thumbnail">
+                                        <rect key="frame" x="150" y="6" width="75" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="75" id="Fal-wM-tcO"/>
+                                            <constraint firstAttribute="width" constant="75" id="H7a-ie-Qei"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCG-j2-1yz" userLabel="Cancel Button">
+                                        <rect key="frame" x="30" y="30" width="26" height="26"/>
+                                        <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelButtonClick:" destination="WSV-Ek-hR6" eventType="touchUpInside" id="iPh-Rc-Prg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="m7H-4m-kUW" firstAttribute="centerY" secondItem="ecG-eu-Ocg" secondAttribute="centerY" id="2tg-xI-MdT"/>
+                                    <constraint firstAttribute="height" constant="87" id="70e-Dz-XAM"/>
+                                    <constraint firstAttribute="bottom" secondItem="aCG-j2-1yz" secondAttribute="bottom" constant="31" id="Dpz-9m-pMA"/>
+                                    <constraint firstAttribute="bottom" secondItem="f8H-KA-w4b" secondAttribute="bottom" constant="31" id="GPJ-hk-bro"/>
+                                    <constraint firstAttribute="trailing" secondItem="f8H-KA-w4b" secondAttribute="trailing" constant="30" id="Ib3-NY-4Pw"/>
+                                    <constraint firstItem="m7H-4m-kUW" firstAttribute="centerX" secondItem="ecG-eu-Ocg" secondAttribute="centerX" id="Ldw-Ua-JJZ"/>
+                                    <constraint firstItem="aCG-j2-1yz" firstAttribute="leading" secondItem="ecG-eu-Ocg" secondAttribute="leading" constant="30" id="vkp-F8-Mdb"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tf3-on-OWs" userLabel="Image Info">
+                                <rect key="frame" x="62" y="30" width="250" height="26"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="- - -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x87-rb-Czt" userLabel="Dim and Size">
+                                        <rect key="frame" x="8" y="3" width="234" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Jr-fF-Cz4" userLabel="Edit Dim Button">
+                                        <rect key="frame" x="3" y="3" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="Edit"/>
+                                        <connections>
+                                            <action selector="editDimButtonClick:" destination="WSV-Ek-hR6" eventType="touchUpInside" id="gtm-ap-9KC"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="9O7-GR-Zeq"/>
+                                    <constraint firstAttribute="width" constant="250" id="HwC-X6-ZO9"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Tf3-on-OWs" firstAttribute="top" secondItem="Z6Z-Pu-hNG" secondAttribute="bottom" constant="10" id="0Qa-UF-swm"/>
+                            <constraint firstItem="0UC-lr-Nyo" firstAttribute="top" secondItem="ecG-eu-Ocg" secondAttribute="bottom" id="4AY-V4-g2p"/>
+                            <constraint firstItem="tiQ-Ju-wL9" firstAttribute="top" secondItem="Z6Z-Pu-hNG" secondAttribute="bottom" constant="-20" id="7z9-A9-O7W"/>
+                            <constraint firstItem="6lQ-pQ-ECM" firstAttribute="top" secondItem="Z6Z-Pu-hNG" secondAttribute="bottom" constant="-20" id="8b9-X4-sF4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tiQ-Ju-wL9" secondAttribute="trailing" constant="-16" id="Fso-gg-m3n"/>
+                            <constraint firstItem="0UC-lr-Nyo" firstAttribute="top" secondItem="6lQ-pQ-ECM" secondAttribute="bottom" id="K7I-o4-bJx"/>
+                            <constraint firstItem="6lQ-pQ-ECM" firstAttribute="leading" secondItem="UJG-pq-JkW" secondAttribute="leadingMargin" constant="-16" id="KVU-re-YhF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6lQ-pQ-ECM" secondAttribute="trailing" constant="-16" id="Qjo-qR-doR"/>
+                            <constraint firstItem="Tf3-on-OWs" firstAttribute="centerX" secondItem="UJG-pq-JkW" secondAttribute="centerX" id="aS9-bX-Izn"/>
+                            <constraint firstItem="tiQ-Ju-wL9" firstAttribute="leading" secondItem="UJG-pq-JkW" secondAttribute="leadingMargin" constant="-16" id="eoE-eY-ZYl"/>
+                            <constraint firstItem="0UC-lr-Nyo" firstAttribute="top" secondItem="tiQ-Ju-wL9" secondAttribute="bottom" id="gUf-aD-ZKp"/>
+                            <constraint firstItem="ecG-eu-Ocg" firstAttribute="leading" secondItem="UJG-pq-JkW" secondAttribute="leadingMargin" constant="-16" id="tYN-CT-YMo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ecG-eu-Ocg" secondAttribute="trailing" constant="-16" id="y86-R5-O85"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="GeT-V9-ePs"/>
+                    <connections>
+                        <outlet property="buttonBar" destination="ecG-eu-Ocg" id="WxB-P1-LNZ"/>
+                        <outlet property="cancelButton" destination="aCG-j2-1yz" id="RxC-St-jPE"/>
+                        <outlet property="editDimButton" destination="4Jr-fF-Cz4" id="BUB-f3-7vN"/>
+                        <outlet property="imageInfoLabel" destination="x87-rb-Czt" id="Lea-6P-3Su"/>
+                        <outlet property="imageOverlay" destination="tiQ-Ju-wL9" id="YW1-NY-jRR"/>
+                        <outlet property="imagePinchZoomScroll" destination="6lQ-pQ-ECM" id="r0q-Z7-s1A"/>
+                        <outlet property="okButton" destination="f8H-KA-w4b" id="4VM-SW-t0r"/>
+                        <outlet property="thumbnailView" destination="m7H-4m-kUW" id="U3h-8j-s2N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zja-FG-9Nu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="712.79999999999995" y="227.13643178410797"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Cancel" width="26" height="26"/>
+        <image name="Edit" width="25" height="25"/>
+        <image name="Ok" width="26" height="26"/>
+    </resources>
+</document>

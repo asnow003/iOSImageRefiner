@@ -12,7 +12,7 @@
 		9E9A651320BF96770003752F /* iOSImageRefinerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A651220BF96770003752F /* iOSImageRefinerTests.swift */; };
 		9E9A651E20BF96770003752F /* iOSImageRefinerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A651D20BF96770003752F /* iOSImageRefinerUITests.swift */; };
 		9E9A652E20BF96990003752F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A652B20BF96980003752F /* Main.storyboard */; };
-		9E9A653020BF96990003752F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A652D20BF96990003752F /* Assets.xcassets */; };
+		9E9A653020BF96990003752F /* ImageEdit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A652D20BF96990003752F /* ImageEdit.xcassets */; };
 		9E9A653320BF97490003752F /* ImageEdit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A653120BF97490003752F /* ImageEdit.storyboard */; };
 		9E9A653420BF97490003752F /* ImageEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A653220BF97490003752F /* ImageEdit.swift */; };
 		9E9A653620BF98630003752F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A653520BF98630003752F /* ViewController.swift */; };
@@ -47,7 +47,7 @@
 		9E9A651D20BF96770003752F /* iOSImageRefinerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSImageRefinerUITests.swift; sourceTree = "<group>"; };
 		9E9A651F20BF96770003752F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E9A652B20BF96980003752F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		9E9A652D20BF96990003752F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9E9A652D20BF96990003752F /* ImageEdit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageEdit.xcassets; sourceTree = "<group>"; };
 		9E9A653120BF97490003752F /* ImageEdit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ImageEdit.storyboard; sourceTree = "<group>"; };
 		9E9A653220BF97490003752F /* ImageEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEdit.swift; sourceTree = "<group>"; };
 		9E9A653520BF98630003752F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -102,13 +102,13 @@
 			isa = PBXGroup;
 			children = (
 				9E9A64FD20BF96740003752F /* AppDelegate.swift */,
-				9E9A652D20BF96990003752F /* Assets.xcassets */,
+				9E9A652D20BF96990003752F /* ImageEdit.xcassets */,
+				9E9A653120BF97490003752F /* ImageEdit.storyboard */,
+				9E9A653220BF97490003752F /* ImageEdit.swift */,
 				9E9A650620BF96770003752F /* LaunchScreen.storyboard */,
 				9E9A650920BF96770003752F /* Info.plist */,
 				9E9A653520BF98630003752F /* ViewController.swift */,
 				9E9A652B20BF96980003752F /* Main.storyboard */,
-				9E9A653120BF97490003752F /* ImageEdit.storyboard */,
-				9E9A653220BF97490003752F /* ImageEdit.swift */,
 			);
 			path = iOSImageRefiner;
 			sourceTree = "<group>";
@@ -238,7 +238,7 @@
 				9E9A653320BF97490003752F /* ImageEdit.storyboard in Resources */,
 				9E9A652E20BF96990003752F /* Main.storyboard in Resources */,
 				9E9A650820BF96770003752F /* LaunchScreen.storyboard in Resources */,
-				9E9A653020BF96990003752F /* Assets.xcassets in Resources */,
+				9E9A653020BF96990003752F /* ImageEdit.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,7 +431,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = F5KH5U4JZP;
 				INFOPLIST_FILE = iOSImageRefiner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -449,7 +449,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = F5KH5U4JZP;
 				INFOPLIST_FILE = iOSImageRefiner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

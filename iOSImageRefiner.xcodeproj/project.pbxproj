@@ -106,6 +106,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		9E1D785120C35A98006F1BE9 /* ImageEdit */ = {
+			isa = PBXGroup;
+			children = (
+				9E9A652D20BF96990003752F /* ImageEdit.xcassets */,
+				9E9A653120BF97490003752F /* ImageEdit.storyboard */,
+				9E9A653220BF97490003752F /* ImageEdit.swift */,
+			);
+			path = ImageEdit;
+			sourceTree = "<group>";
+		};
 		9E9A64F120BF96740003752F = {
 			isa = PBXGroup;
 			children = (
@@ -131,10 +141,8 @@
 		9E9A64FC20BF96740003752F /* iOSImageRefiner */ = {
 			isa = PBXGroup;
 			children = (
+				9E1D785120C35A98006F1BE9 /* ImageEdit */,
 				9E9A64FD20BF96740003752F /* AppDelegate.swift */,
-				9E9A652D20BF96990003752F /* ImageEdit.xcassets */,
-				9E9A653120BF97490003752F /* ImageEdit.storyboard */,
-				9E9A653220BF97490003752F /* ImageEdit.swift */,
 				9E9A650620BF96770003752F /* LaunchScreen.storyboard */,
 				9E9A650920BF96770003752F /* Info.plist */,
 				9E9A653520BF98630003752F /* ViewController.swift */,

@@ -13,7 +13,7 @@
         <!--Image Edit-->
         <scene sceneID="LdD-wd-BzO">
             <objects>
-                <viewController storyboardIdentifier="ImageEdit" automaticallyAdjustsScrollViewInsets="NO" id="WSV-Ek-hR6" customClass="ImageEdit" customModule="iOS_Image_Refiner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageEdit" automaticallyAdjustsScrollViewInsets="NO" id="WSV-Ek-hR6" customClass="ImageEdit" customModule="iOSImageRefiner" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Z6Z-Pu-hNG"/>
                         <viewControllerLayoutGuide type="bottom" id="0UC-lr-Nyo"/>
@@ -29,7 +29,7 @@
                                     <outlet property="delegate" destination="WSV-Ek-hR6" id="65f-4m-VkT"/>
                                 </connections>
                             </scrollView>
-                            <view userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-Ju-wL9" customClass="ViewWithCutout" customModule="iOS_Image_Refiner" customModuleProvider="target">
+                            <view userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-Ju-wL9" customClass="ViewWithCutout" customModule="iOSImageRefiner" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="AUn-ol-K80">
@@ -42,7 +42,7 @@
                                     <constraint firstItem="AUn-ol-K80" firstAttribute="centerX" secondItem="tiQ-Ju-wL9" secondAttribute="centerX" id="cIb-ho-YI2"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecG-eu-Ocg" userLabel="Button Bar">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecG-eu-Ocg" userLabel="Buttons Thumbnail">
                                 <rect key="frame" x="0.0" y="580" width="375" height="87"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8H-KA-w4b" userLabel="Ok Button">
@@ -80,8 +80,8 @@
                                     <constraint firstItem="aCG-j2-1yz" firstAttribute="leading" secondItem="ecG-eu-Ocg" secondAttribute="leading" constant="30" id="vkp-F8-Mdb"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tf3-on-OWs" userLabel="Image Info">
-                                <rect key="frame" x="62" y="30" width="250" height="26"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tf3-on-OWs" userLabel="Image Infoformation">
+                                <rect key="frame" x="62.5" y="30" width="250" height="26"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="- - -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x87-rb-Czt" userLabel="Dim and Size">
                                         <rect key="frame" x="8" y="3" width="234" height="20"/>
@@ -107,7 +107,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Tf3-on-OWs" firstAttribute="top" secondItem="Z6Z-Pu-hNG" secondAttribute="bottom" constant="10" id="0Qa-UF-swm"/>
                             <constraint firstItem="0UC-lr-Nyo" firstAttribute="top" secondItem="ecG-eu-Ocg" secondAttribute="bottom" id="4AY-V4-g2p"/>

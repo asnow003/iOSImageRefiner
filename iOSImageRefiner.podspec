@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = 'iOSImageRefiner'
-  s.version          = 'v0.2.0'
-  s.summary          = 'iOS viewcontroller for refining, cropping, and resizing images.'
+  s.version          = '0.3.0'
+  s.summary          = 'iOS viewcontroller for refining, cropping, and resizing images......'
  
   s.description      = <<-DESC
   iOS viewcontroller that can be added to your existing application so that users can refine their images that are selected.

@@ -6,9 +6,9 @@ Use this utility in your applications so your users can crop a given images or u
  - Set the quality of image 1x, 2x, 3x (to support retina).
  - Optional creation of thumbnail image.
 
-![enter image description here](https://github.com/asnow003/iOSImageRefiner/docs/ImageEdit1.png)
+![enter image description here](https://github.com/asnow003/iOSImageRefiner/blob/master/docs/ImageEdit2.png?raw=true)
 
-![enter image description here](https://github.com/asnow003/iOSImageRefiner/docs/ImageEdit2.png)
+![enter image description here](https://github.com/asnow003/iOSImageRefiner/blob/master/docs/ImageEdit1.png?raw=true)
 ## Installation
 
 ### Cocopods

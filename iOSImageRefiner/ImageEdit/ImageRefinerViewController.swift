@@ -16,10 +16,10 @@ public enum ImageRefinerQuality: Int {
 }
 
 public protocol ImageRefinerDelegate: class {
-    func imageEdited(image: UIImage, thumbnail: UIImage?, scaleFactor: Int)
+    func imageUpdated(image: UIImage, thumbnail: UIImage?, scaleFactor: Int)
 }
 
-public class ImageEdit: UIViewController, UIScrollViewDelegate {
+public class ImageRefinerViewController: UIViewController, UIScrollViewDelegate {
     
     public weak var delegate: ImageRefinerDelegate?
     
@@ -112,7 +112,7 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
         if let _image = self.getEditedImage() {
             if let _delegate = self.delegate {
                 self.generateThumbnail()
-                _delegate.imageEdited(image: _image, thumbnail: self.thumbnailView.image, scaleFactor: self.imageScaleFactor.rawValue)
+                _delegate.imageUpdated(image: _image, thumbnail: self.thumbnailView.image, scaleFactor: self.imageScaleFactor.rawValue)
             }
         }
         
@@ -307,7 +307,7 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
             self.generateThumbnailTimer.invalidate()
             self.generateThumbnailTimer = Timer.scheduledTimer(timeInterval: 0.2,
                                                                target: self,
-                                                               selector: #selector(ImageEdit.generateThumbnail),
+                                                               selector: #selector(ImageRefinerViewController.generateThumbnail),
                                                                userInfo: nil,
                                                                repeats: false)
         }

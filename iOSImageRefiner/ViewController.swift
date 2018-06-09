@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  ImageEditSample
+//  ImageRefinerSample
 //
 //  Created by Allen Snow on 5/26/18.
 //  Copyright © 2018 Waggle Bum. All rights reserved.
@@ -74,17 +74,17 @@ class ViewController: UIViewController,
             
             let storyboard = UIStoryboard(name: "ImageRefiner", bundle: nil)
             
-            if let _imageEdit = storyboard.instantiateViewController(withIdentifier: "ImageEdit") as? ImageEdit {
+            if let _imageRefiner = storyboard.instantiateViewController(withIdentifier: "ImageRefiner") as? ImageRefinerViewController {
                 
-                _imageEdit.image = origImage
+                _imageRefiner.image = origImage
                 
-                _imageEdit.imageOptions = ImageRefinerOptions(
+                _imageRefiner.imageOptions = ImageRefinerOptions(
                     cropWidth: 240,
                     cropHeight: 240)
 
-                _imageEdit.delegate = self
+                _imageRefiner.delegate = self
                 
-                self.present(_imageEdit, animated: true, completion: nil)
+                self.present(_imageRefiner, animated: true, completion: nil)
             }
         }
     }
@@ -93,7 +93,7 @@ class ViewController: UIViewController,
         picker.dismiss(animated: true)
     }
     
-    public func imageEdited(image: UIImage, thumbnail: UIImage?, scaleFactor: Int) {
+    public func imageUpdated(image: UIImage, thumbnail: UIImage?, scaleFactor: Int) {
         self.thumbnailView.image = thumbnail
         self.imageView.image = image
         

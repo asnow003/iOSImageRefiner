@@ -1,5 +1,5 @@
 //
-//  ImageEditOptionsViewController.swift
+//  ImageRefinerOptionsViewController.swift
 //  iOSImageRefiner
 //
 //  Created by Allen Snow on 6/5/18.

@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Image Edit-->
+        <!--Image Refiner-->
         <scene sceneID="LdD-wd-BzO">
             <objects>
-                <viewController storyboardIdentifier="ImageEdit" automaticallyAdjustsScrollViewInsets="NO" id="WSV-Ek-hR6" customClass="ImageEdit" customModule="iOSImageRefiner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageRefiner" automaticallyAdjustsScrollViewInsets="NO" id="WSV-Ek-hR6" userLabel="Image Refiner" customClass="ImageRefinerViewController" customModule="iOSImageRefiner" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Z6Z-Pu-hNG"/>
                         <viewControllerLayoutGuide type="bottom" id="0UC-lr-Nyo"/>

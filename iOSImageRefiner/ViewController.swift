@@ -75,10 +75,12 @@ class ViewController: UIViewController,
             let storyboard = UIStoryboard(name: "ImageEdit", bundle: nil)
             
             if let _imageEdit = storyboard.instantiateViewController(withIdentifier: "ImageEdit") as? ImageEdit {
+                
                 _imageEdit.image = origImage
                 
-                _imageEdit.imageCropWidth = 240
-                _imageEdit.imageCropHeight = 240
+                _imageEdit.imageOptions = ImageEditOptions(
+                    cropWidth: 240,
+                    cropHeight: 240)
 
                 _imageEdit.delegate = self
                 

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'iOSImageRefiner'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'iOS viewcontroller for cropping and resizing images......'
  
   s.description      = <<-DESC

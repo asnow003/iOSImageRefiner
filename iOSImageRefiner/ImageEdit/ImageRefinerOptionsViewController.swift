@@ -1,5 +1,5 @@
 //
-//  ImageEditOptions.swift
+//  ImageEditOptionsViewController.swift
 //  iOSImageRefiner
 //
 //  Created by Allen Snow on 6/5/18.
@@ -9,9 +9,8 @@
 import UIKit
 import Foundation
 
-public class ImageOptionsViewController: UITableViewController {
+public class ImageRefinerOptionsViewController: UITableViewController {
 
-    
     @IBAction func CancelButtonClick(_ sender: Any) {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }

@@ -1,5 +1,5 @@
 //
-//  ImageEdit.swift
+//  ImageRefinerViewController.swift
 //  kluSter
 //
 //  Created by Allen Snow on 10/12/16.
@@ -9,38 +9,22 @@
 import UIKit
 import ImageIO
 
-public enum ImageEditQuality: Int {
+public enum ImageRefinerQuality: Int {
     case standard = 1
     case high = 2
     case retina = 3
 }
 
-public protocol ImageEditDelegate: class {
+public protocol ImageRefinerDelegate: class {
     func imageEdited(image: UIImage, thumbnail: UIImage?, scaleFactor: Int)
-}
-
-public class ImageEditOptions {
-    public var cropWidth: CGFloat?
-    public var cropHeight: CGFloat?
-    public var quality: ImageEditQuality?
-    
-    init(
-        cropWidth: CGFloat? = nil,
-        cropHeight: CGFloat? = nil,
-        quality: ImageEditQuality? = nil
-        ) {
-        self.cropHeight = cropHeight
-        self.cropWidth = cropWidth
-        self.quality = quality
-    }
 }
 
 public class ImageEdit: UIViewController, UIScrollViewDelegate {
     
-    public weak var delegate: ImageEditDelegate?
+    public weak var delegate: ImageRefinerDelegate?
     
     public var image: UIImage?
-    public var imageOptions: ImageEditOptions? {
+    public var imageOptions: ImageRefinerOptions? {
         didSet {
             self.imageCropHeight = imageOptions?.cropHeight ?? self.imageCropHeight
             self.imageCropWidth = imageOptions?.cropWidth ?? self.imageCropWidth
@@ -54,7 +38,7 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
     
     private var imageCropWidth: CGFloat = 200
     private var imageCropHeight: CGFloat = 200
-    private var imageScaleFactor: ImageEditQuality = ImageEditQuality.standard
+    private var imageScaleFactor: ImageRefinerQuality = ImageRefinerQuality.standard
     
     private var imageCropScale: CGFloat = 1
     private var scaledImageCropWidth: CGFloat = 0
@@ -86,7 +70,7 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
     public func setOptions(
         cropWidth: CGFloat,
         cropHeight: CGFloat,
-        quality: ImageEditQuality = ImageEditQuality.standard) {
+        quality: ImageRefinerQuality = ImageRefinerQuality.standard) {
         self.imageCropWidth = cropWidth
         self.imageCropHeight = cropHeight
         self.imageScaleFactor = quality

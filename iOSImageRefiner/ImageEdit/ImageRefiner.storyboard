@@ -140,10 +140,10 @@
             </objects>
             <point key="canvasLocation" x="712.79999999999995" y="227.13643178410797"/>
         </scene>
-        <!--Image Options View Controller-->
+        <!--Image Refiner Options View Controller-->
         <scene sceneID="9UX-YV-gh8">
             <objects>
-                <tableViewController id="YbT-be-3Hf" customClass="ImageOptionsViewController" customModule="iOSImageRefiner" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="YbT-be-3Hf" customClass="ImageRefinerOptionsViewController" customModule="iOSImageRefiner" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Hy2-0v-fLE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

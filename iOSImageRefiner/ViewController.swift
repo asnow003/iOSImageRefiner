@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController,
     UINavigationControllerDelegate,
     UIImagePickerControllerDelegate,
-    ImageEditDelegate {
+    ImageRefinerDelegate {
 
     let imagePickerController: UIImagePickerController = UIImagePickerController()
     
@@ -72,13 +72,13 @@ class ViewController: UIViewController,
         
         self.imagePickerController.dismiss(animated: true) {
             
-            let storyboard = UIStoryboard(name: "ImageEdit", bundle: nil)
+            let storyboard = UIStoryboard(name: "ImageRefiner", bundle: nil)
             
             if let _imageEdit = storyboard.instantiateViewController(withIdentifier: "ImageEdit") as? ImageEdit {
                 
                 _imageEdit.image = origImage
                 
-                _imageEdit.imageOptions = ImageEditOptions(
+                _imageEdit.imageOptions = ImageRefinerOptions(
                     cropWidth: 240,
                     cropHeight: 240)
 

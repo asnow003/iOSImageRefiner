@@ -76,13 +76,12 @@ class ViewController: UIViewController,
             
             if let _imageRefiner = storyboard.instantiateViewController(withIdentifier: "ImageRefiner") as? ImageRefinerViewController {
                 
-                _imageRefiner.image = origImage
-                
                 _imageRefiner.imageOptions = ImageRefinerOptions(
                     cropWidth: 240,
                     cropHeight: 240)
 
                 _imageRefiner.delegate = self
+                _imageRefiner.image = origImage
                 
                 self.present(_imageRefiner, animated: true, completion: nil)
             }

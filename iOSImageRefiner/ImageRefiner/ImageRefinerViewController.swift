@@ -21,6 +21,8 @@ public protocol ImageRefinerDelegate: class {
 
 public class ImageRefinerViewController: UIViewController, UIScrollViewDelegate, ImageRefinerOptionsDelegate, UIGestureRecognizerDelegate {
     
+    public static let storyboardName: String = "ImageRefiner"
+    
     public weak var delegate: ImageRefinerDelegate?
     
     public var image: UIImage?

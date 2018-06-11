@@ -72,9 +72,9 @@ class ViewController: UIViewController,
         
         self.imagePickerController.dismiss(animated: true) {
             
-            let storyboard = UIStoryboard(name: "ImageRefiner", bundle: nil)
+            let storyboard = UIStoryboard(name: ImageRefinerViewController.storyboardName, bundle: nil)
             
-            if let _imageRefiner = storyboard.instantiateViewController(withIdentifier: "ImageRefiner") as? ImageRefinerViewController {
+            if let _imageRefiner = storyboard.instantiateViewController(withIdentifier: ImageRefinerViewController.storyboardName) as? ImageRefinerViewController {
                 
                 _imageRefiner.imageOptions = ImageRefinerOptions(
                     cropWidth: 240,

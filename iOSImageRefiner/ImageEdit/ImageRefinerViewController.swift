@@ -19,7 +19,7 @@ public protocol ImageRefinerDelegate: class {
     func imageUpdated(image: UIImage, thumbnail: UIImage?, scaleFactor: Int)
 }
 
-public class ImageRefinerViewController: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate {
+public class ImageRefinerViewController: UIViewController, UIScrollViewDelegate, ImageRefinerOptionsDelegate, UIGestureRecognizerDelegate {
     
     public weak var delegate: ImageRefinerDelegate?
     
@@ -59,7 +59,9 @@ public class ImageRefinerViewController: UIViewController, UIScrollViewDelegate,
     private var imageCropFocusX: CGFloat = 0
     private var imageCropFocusY: CGFloat = 0
     
+    private var imageLoaded: Bool = false
     private var imageView = UIImageView()
+    
     @IBOutlet weak var thumbnailContainerView: UIView!
     @IBOutlet weak var thumbnailView: UIImageView!
     
@@ -104,7 +106,12 @@ public class ImageRefinerViewController: UIViewController, UIScrollViewDelegate,
     
     public override func viewDidAppear(_ animated: Bool) {
         if let _image = self.image {
-            self.loadImage(image: _image)
+            if !self.imageLoaded {
+                self.loadImage(image: _image)
+                self.imageLoaded = true
+            } else {
+                self.setThumbnail()
+            }
         }
     }
     
@@ -121,6 +128,13 @@ public class ImageRefinerViewController: UIViewController, UIScrollViewDelegate,
     
     @IBAction func cancelButtonClick(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    public func optionsUpdated(options: ImageRefinerOptions) {
+        self.imageOptions = options
+        if let _image = self.image {
+            self.loadImage(image: _image)
+        }
     }
     
     func compress(_ image: UIImage) -> UIImage {
@@ -456,8 +470,10 @@ public class ImageRefinerViewController: UIViewController, UIScrollViewDelegate,
     }
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let _editor = segue.destination as? ImageRefinerOptionsViewController,
+        if let _nav = segue.destination as? UINavigationController,
+            let _editor = _nav.topViewController as? ImageRefinerOptionsViewController,
             let _options = self.imageOptions {
+            _editor.delegate = self
             _editor.options = _options
         }
     }
@@ -468,12 +484,14 @@ public class ViewWithCutout: UIView {
     public var transparentHoleView: UIView? = nil
     
     private var outlineBorder = UIView()
+    private var thumbnailBorder = UIView()
     
     // MARK: - Drawing
     override public func draw(_ rect: CGRect) {
         super.draw(rect)
         
         outlineBorder.removeFromSuperview()
+        thumbnailBorder.removeFromSuperview()
         
         if let _hole = self.transparentHoleView {
             // Ensures to use the current background color to set the filling color

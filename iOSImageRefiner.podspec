@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'iOSImageRefiner'
-  s.version          = '1.0.1'
+  s.version          = '1.1.0'
   s.summary          = 'iOS viewcontroller for cropping and resizing images......'
  
   s.description      = <<-DESC
@@ -14,6 +14,13 @@ Pod::Spec.new do |s|
  
   s.ios.deployment_target = '11.3'
   s.swift_version = '4.1'
-  s.source_files = 'iOSImageRefiner/ImageEdit/ImageEdit.swift'
-  s.resources = ['iOSImageRefiner/ImageEdit/ImageEdit.storyboard', 'iOSImageRefiner/ImageEdit/ImageEdit.xcassets']
+  s.source_files = [
+    'iOSImageRefiner/ImageRefiner/ImageRefinerOptions.swift',
+    'iOSImageRefiner/ImageRefiner/ImageRefinerOptionsViewController.swift',
+    'iOSImageRefiner/ImageRefiner/ImageRefinerViewController.swift'
+  ]
+  s.resources = [
+    'iOSImageRefiner/ImageRefiner/ImageRefiner.storyboard',
+     'iOSImageRefiner/ImageRefiner/ImageRefiner.xcassets'
+    ]
 end

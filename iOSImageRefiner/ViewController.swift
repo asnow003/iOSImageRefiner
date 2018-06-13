@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  ImageEditSample
+//  ImageRefinerSample
 //
 //  Created by Allen Snow on 5/26/18.
 //  Copyright © 2018 Waggle Bum. All rights reserved.
@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController,
     UINavigationControllerDelegate,
     UIImagePickerControllerDelegate,
-    ImageEditDelegate {
+    ImageRefinerDelegate {
 
     let imagePickerController: UIImagePickerController = UIImagePickerController()
     
@@ -72,17 +72,18 @@ class ViewController: UIViewController,
         
         self.imagePickerController.dismiss(animated: true) {
             
-            let storyboard = UIStoryboard(name: "ImageEdit", bundle: nil)
+            let storyboard = UIStoryboard(name: ImageRefinerViewController.storyboardName, bundle: nil)
             
-            if let _imageEdit = storyboard.instantiateViewController(withIdentifier: "ImageEdit") as? ImageEdit {
-                _imageEdit.image = origImage
+            if let _imageRefiner = storyboard.instantiateViewController(withIdentifier: ImageRefinerViewController.storyboardName) as? ImageRefinerViewController {
                 
-                _imageEdit.imageCropWidth = 240
-                _imageEdit.imageCropHeight = 240
+                _imageRefiner.options = ImageRefinerOptions(
+                    cropWidth: 240,
+                    cropHeight: 240)
 
-                _imageEdit.delegate = self
+                _imageRefiner.delegate = self
+                _imageRefiner.image = origImage
                 
-                self.present(_imageEdit, animated: true, completion: nil)
+                self.present(_imageRefiner, animated: true, completion: nil)
             }
         }
     }
@@ -91,7 +92,7 @@ class ViewController: UIViewController,
         picker.dismiss(animated: true)
     }
     
-    public func imageEdited(image: UIImage, thumbnail: UIImage?, scaleFactor: Int) {
+    public func imageUpdated(image: UIImage, thumbnail: UIImage?, scaleFactor: Int) {
         self.thumbnailView.image = thumbnail
         self.imageView.image = image
         

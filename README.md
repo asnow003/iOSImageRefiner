@@ -8,7 +8,11 @@ Use this utility in your applications so your users can crop a given images or u
 
 Crop                       |  Custom crop
 :-------------------------:|:-------------------------:
-![](https://github.com/asnow003/iOSImageRefiner/blob/master/docs/ImageEdit2.png?raw=true) | ![](https://github.com/asnow003/iOSImageRefiner/blob/master/docs/ImageEdit1.png?raw=true)
+![](https://github.com/asnow003/iOSImageRefiner/blob/master/docs/ImageEdit1.png?raw=true) | ![](https://github.com/asnow003/iOSImageRefiner/blob/master/docs/ImageEdit2.png?raw=true)
+
+Edit Options               |  Sizes
+:-------------------------:|:-------------------------:
+![](https://github.com/asnow003/iOSImageRefiner/blob/master/docs/ImageEdit3.png?raw=true) | ![](https://github.com/asnow003/iOSImageRefiner/blob/master/docs/ImageEdit4.png?raw=true)
 
 ## Installation
 

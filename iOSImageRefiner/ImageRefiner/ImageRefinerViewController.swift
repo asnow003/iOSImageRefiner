@@ -1,6 +1,6 @@
 //
-//  ImageEdit.swift
-//  kluSter
+//  ImageRefinerViewController.swift
+//  iOSImageRefiner
 //
 //  Created by Allen Snow on 10/12/16.
 //  Copyright © 2016 Waggle Bum. All rights reserved.
@@ -9,40 +9,71 @@
 import UIKit
 import ImageIO
 
-public protocol ImageEditDelegate: class {
-    func imageEdited(image: UIImage, thumbnail: UIImage?, scaleFactor: Int)
+/// Types of image quality
+///
+/// - standard: 1x support
+/// - high: 2x support
+/// - retina: 3x support retina
+public enum ImageRefinerQuality: Int {
+    case standard = 1
+    case high = 2
+    case retina = 3
 }
 
-public class ImageEdit: UIViewController, UIScrollViewDelegate {
-    
-    public weak var delegate: ImageEditDelegate?
-    
-    public var buttonColor: UIColor = UIColor.white
-    public var image: UIImage?
-    public var showThumbnailPreview: Bool = true
-    public var showEditButton: Bool = false
+/// Image refiner delegate
+public protocol ImageRefinerDelegate: class {
+    /// Returns the refined image information
+    ///
+    /// - Parameters:
+    ///   - image: Refined result image
+    ///   - thumbnail: Thumbnail results from the refined image
+    ///   - scaleFactor: Scale factor for the refined image
+    func imageUpdated(image: UIImage, thumbnail: UIImage?, scaleFactor: Int)
+}
 
-    public var imageScaleFactor: Int = 1
+/// Image refiner storyboard view controller
+/// Allow for cropping and resizing of a given image
+public class ImageRefinerViewController:
+    UIViewController,
+    UIScrollViewDelegate,
+    ImageRefinerOptionsDelegate {
     
-    private var _imageCropWidth: CGFloat = 200
-    public var imageCropWidth: CGFloat {
-        get {
-            return self._imageCropWidth * CGFloat(imageScaleFactor)
-        }
-        set {
-            self._imageCropWidth = newValue
+    /// Name of the storyboard associated with this ViewController
+    public static let storyboardName: String = "ImageRefiner"
+    
+    /// Image refiner delegate
+    public weak var delegate: ImageRefinerDelegate?
+    
+    /// Image to be edited by the refiner
+    public var image: UIImage?
+    
+    /// Options that can be set for the refiner
+    public var options: ImageRefinerOptions? {
+        didSet {
+            self.imageCropHeight = options?.cropHeight ?? self.imageCropHeight
+            self.imageCropWidth = options?.cropWidth ?? self.imageCropWidth
+            self.imageScaleFactor = options?.quality ?? self.imageScaleFactor
+            self.thumbWidthHeight = options?.thumbWidthHeight ?? self.thumbWidthHeight
+            self.thumbQuality = options?.thumbQuality ?? self.thumbQuality
         }
     }
     
-    private var _imageCropHeight: CGFloat = 200
-    public var imageCropHeight: CGFloat {
-        get {
-            return _imageCropHeight * CGFloat(imageScaleFactor)
-        }
-        set {
-            _imageCropHeight = newValue
-        }
-    }
+    /// Tint color for the action buttons
+    public var buttonColor: UIColor = UIColor.white
+    
+    /// Show the thumbnail preview image while editing
+    public var showThumbnailPreview: Bool = true
+    
+    /// Show the edit option button that allows user make changes
+    /// to the defaults set
+    public var showEditOptionsButton: Bool = true
+    
+    private var imageCropWidth: CGFloat = 200
+    private var imageCropHeight: CGFloat = 200
+    private var imageScaleFactor: ImageRefinerQuality = ImageRefinerQuality.standard
+    
+    private var thumbWidthHeight: CGFloat = 75
+    private var thumbQuality: ImageRefinerQuality = ImageRefinerQuality.standard
     
     private var imageCropScale: CGFloat = 1
     private var scaledImageCropWidth: CGFloat = 0
@@ -58,7 +89,10 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
     private var imageCropFocusX: CGFloat = 0
     private var imageCropFocusY: CGFloat = 0
     
+    private var imageLoaded: Bool = false
     private var imageView = UIImageView()
+    
+    @IBOutlet weak var thumbnailContainerView: UIView!
     @IBOutlet weak var thumbnailView: UIImageView!
     
     @IBOutlet weak var imagePinchZoomScroll: UIScrollView!
@@ -69,7 +103,12 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var imageInfoLabel: UILabel!
 
-    @IBOutlet weak var editDimButton: UIButton!
+    @IBOutlet weak var editOptionsButton: UIButton!
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        self.imageInfoLabel.alpha = 0
+        self.thumbnailView.alpha = 0
+    }
     
     public override func viewDidLoad() {
         
@@ -78,7 +117,7 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
             automaticallyAdjustsScrollViewInsets = false
         }
         
-        self.editDimButton.isHidden = !self.showEditButton
+        self.editOptionsButton.isHidden = !self.showEditOptionsButton
         
         super.viewDidLoad()
         
@@ -89,17 +128,40 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
         
         self.okButton.imageView!.tintColor = self.buttonColor
         self.cancelButton.imageView!.tintColor = self.buttonColor
-        self.editDimButton.imageView!.tintColor = self.buttonColor
+        self.editOptionsButton.imageView!.tintColor = self.buttonColor
     }
     
     public override func viewDidAppear(_ animated: Bool) {
         if let _image = self.image {
-            self.loadImage(image: _image)
+            if !self.imageLoaded {
+                self.loadImage(image: _image)
+                self.imageLoaded = true
+            } else {
+                self.setThumbnail()
+            }
         }
+    }
+    
+    @IBAction func okButtonClick(_ sender: AnyObject) {
+        if let _image = self.getEditedImage() {
+            if let _delegate = self.delegate {
+                self.generateThumbnail()
+                _delegate.imageUpdated(image: _image, thumbnail: self.thumbnailView.image, scaleFactor: self.imageScaleFactor.rawValue)
+            }
+        }
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancelButtonClick(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    public func optionsUpdated(options: ImageRefinerOptions) {
+        self.options = options
+        if let _image = self.image {
+            self.loadImage(image: _image)
+        }
     }
     
     func compress(_ image: UIImage) -> UIImage {
@@ -108,19 +170,12 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
         return UIImage(data: imageData)!
     }
     
-    @IBAction func okButtonClick(_ sender: AnyObject) {
-        if let _image = self.getEditedImage() {
-            if let _delegate = self.delegate {
-                self.generateThumbnail()
-                _delegate.imageEdited(image: _image, thumbnail: self.thumbnailView.image, scaleFactor: self.imageScaleFactor)
-            }
-        }
-        
-        self.dismiss(animated: true, completion: nil)
+    private func adjustedImageCropWidth() -> CGFloat {
+        return self.imageCropWidth * CGFloat(imageScaleFactor.rawValue)
     }
     
-    @IBAction func editDimButtonClick(_ sender: AnyObject) {
-
+    private func adjustedImageCropHeight() -> CGFloat {
+        return self.imageCropHeight * CGFloat(imageScaleFactor.rawValue)
     }
     
     public func scaleImage(image: UIImage, scaleFactor: CGFloat) -> UIImage? {
@@ -140,7 +195,6 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
         return newImage
     }
 
-    
     private func getEditedImage() -> UIImage? {
         
         let offsetX: CGFloat = self.imagePinchZoomScroll.contentOffset.x
@@ -162,10 +216,10 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
         var imageScale = self.imagePinchZoomScroll.zoomScale
         
         // if the crop area has been scaled
-        if self.scaledImageCropWidth != self.imageCropWidth ||
-            self.scaledImageCropHeight != self.imageCropHeight {
+        if self.scaledImageCropWidth != self.adjustedImageCropWidth() ||
+            self.scaledImageCropHeight != self.adjustedImageCropHeight() {
             
-            let scaleAdjustment =  self.imageCropWidth / self.scaledImageCropWidth
+            let scaleAdjustment =  self.adjustedImageCropWidth() / self.scaledImageCropWidth
             
             cropWidth = cropWidth * scaleAdjustment
             cropHeight = cropHeight * scaleAdjustment
@@ -177,7 +231,6 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
         }
         
         if let _image = self.image {
-            
             if let _scaledImage = scaleImage(image: _image, scaleFactor: imageScale) {
                 let crop = CGRect(x: cropX,
                                   y: cropY,
@@ -200,8 +253,8 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
         let editorWidth = self.imageOverlay.frame.size.width - 50
         let editorHeight = self.imageOverlay.frame.size.height - 50
         
-        let cropWidth = self.imageCropWidth
-        let cropHeight = self.imageCropHeight
+        let cropWidth = self.adjustedImageCropWidth()
+        let cropHeight = self.adjustedImageCropHeight()
         
         // if the crop area is bigger than the screen
         if cropWidth > editorWidth ||
@@ -222,12 +275,12 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
         
         self.imageView.alpha = 0
         self.thumbnailView.alpha = 0
-        self.thumbnailView.layer.borderColor = UIColor.gray.cgColor
-        self.thumbnailView.layer.borderWidth = 0.5
+        self.thumbnailContainerView.layer.borderColor = UIColor.gray.cgColor
+        self.thumbnailContainerView.layer.borderWidth = 1
         
         self.imageCropScale = self.getCropScale()
-        self.scaledImageCropWidth = self.imageCropWidth * self.imageCropScale
-        self.scaledImageCropHeight = self.imageCropHeight * self.imageCropScale
+        self.scaledImageCropWidth = self.adjustedImageCropWidth() * self.imageCropScale
+        self.scaledImageCropHeight = self.adjustedImageCropHeight() * self.imageCropScale
 
         self.imageWidth = image.size.width
         self.imageHeight = image.size.height
@@ -281,7 +334,7 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
             self.imageView.alpha = 1
         }
     }
-
+    
     private func setCropFocus(x: CGFloat, y: CGFloat) {
         self.imageCropFocusX = x
         self.imageCropFocusY = y
@@ -292,30 +345,29 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
             self.thumbnailView.image = nil
             self.thumbnailView.alpha = 0
             self.generateThumbnailTimer.invalidate()
-            self.generateThumbnailTimer = Timer.scheduledTimer(timeInterval: 0.2,
-                                                               target: self,
-                                                               selector: #selector(ImageEdit.generateThumbnail),
-                                                               userInfo: nil,
-                                                               repeats: false)
+            self.generateThumbnailTimer = Timer.scheduledTimer(
+                timeInterval: 0.2,
+                target: self,
+                selector: #selector(ImageRefinerViewController.generateThumbnail),
+                userInfo: nil,
+                repeats: false)
         }
     }
     
-    public func getImageDetails(image: UIImage, scaleFactor: Int = 1) -> String? {
+    private func getImageDetails(image: UIImage, width: Int, height: Int) -> String? {
         if let _imageData = UIImagePNGRepresentation(image) {
             
             let imageSize = Int64(_imageData.count)
             
             let size = ByteCountFormatter.string(fromByteCount: imageSize, countStyle: ByteCountFormatter.CountStyle.file)
             
-            let width = "\(Int(image.size.width / CGFloat(scaleFactor)))"
-            let height = "\(Int(image.size.height / CGFloat(scaleFactor)))"
-            return String(format: "w%@ x h%@, %@", width, height, size)
+            return "w\(width) x h\(height), \(size)"
         }
         
         return nil
     }
     
-    public func resizeImage(_ image: UIImage, targetSize: CGSize, compression: CGFloat = 100, origin: CGPoint? = nil, useDeviceScaleFactor: Bool = false) -> UIImage {
+    private func resizeImage(_ image: UIImage, targetSize: CGSize, compression: CGFloat = 100, origin: CGPoint? = nil, useDeviceScaleFactor: Bool = false) -> UIImage {
         
         let sourceImage:UIImage = image
         var newImage:UIImage? = nil
@@ -327,7 +379,7 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
         var scaleFactor:CGFloat = 0.00
         var scaledWidth = targetWidth
         var scaledHeight = targetHeight
-        var thumbnailPoint:CGPoint = CGPoint(x: 0.0, y: 0.0)
+        var thumbnailPoint:CGPoint = origin == nil ? CGPoint(x: 0.0, y: 0.0) : origin!
         
         if (imageSize.equalTo(targetSize) == false)
         {
@@ -362,9 +414,9 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
         UIGraphicsBeginImageContextWithOptions(targetSize, false, imageScaleFactor)
         
         var thumbnailRect = CGRect.zero;
-        thumbnailRect.origin = origin != nil ? origin! : thumbnailPoint;
-        thumbnailRect.size.width  = scaledWidth;
-        thumbnailRect.size.height = scaledHeight;
+        thumbnailRect.origin = thumbnailPoint
+        thumbnailRect.size.width  = scaledWidth
+        thumbnailRect.size.height = scaledHeight
         
         sourceImage.draw(in: thumbnailRect)
         
@@ -381,15 +433,33 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
         if let _image = self.getEditedImage() {
             
             self.imageInfoLabel.alpha = 0
-            self.imageInfoLabel.text = getImageDetails(image: _image, scaleFactor: Int(self.imageScaleFactor))
+            self.imageInfoLabel.text = getImageDetails(
+                image: _image,
+                width: Int(self.imageCropWidth),
+                height: Int(self.imageCropHeight)
+            )
             
-            let point = CGPoint(x: 0,
-                                y: 0)
+            // make sure its the center of the cutout
+            var xOffset: CGFloat = 0
+            var yOffset: CGFloat = 0
             
-            let thumbnail = resizeImage(_image, targetSize: CGSize(width: 75, height: 75),
-                                                     compression: 1,
-                                                     origin: point,
-                                                     useDeviceScaleFactor: false)
+            if (self.imageCropWidth != self.imageCropHeight) {
+                let newOffset = abs(self.imageCropWidth - self.imageCropHeight) / 2
+                xOffset = self.imageCropWidth > self.imageCropHeight ? newOffset : 0
+                yOffset = self.imageCropWidth < self.imageCropHeight ? newOffset : 0
+            }
+            
+            let point = CGPoint(x: xOffset,
+                                y: yOffset)
+            
+            let scaledThumbWidthHeight = self.thumbWidthHeight * CGFloat(self.thumbQuality.rawValue)
+            
+            let thumbnail = resizeImage(
+                _image,
+                targetSize: CGSize(width: scaledThumbWidthHeight, height: scaledThumbWidthHeight),
+                compression: 1,
+                origin: point,
+                useDeviceScaleFactor: false)
             
             self.thumbnailView.image = thumbnail
             
@@ -418,6 +488,15 @@ public class ImageEdit: UIViewController, UIScrollViewDelegate {
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.setThumbnail()
     }
+    
+    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let _nav = segue.destination as? UINavigationController,
+            let _editor = _nav.topViewController as? ImageRefinerOptionsViewController,
+            let _options = self.options {
+            _editor.delegate = self
+            _editor.options = _options
+        }
+    }
 }
 
 public class ViewWithCutout: UIView {
@@ -425,12 +504,14 @@ public class ViewWithCutout: UIView {
     public var transparentHoleView: UIView? = nil
     
     private var outlineBorder = UIView()
+    private var thumbnailBorder = UIView()
     
     // MARK: - Drawing
     override public func draw(_ rect: CGRect) {
         super.draw(rect)
         
         outlineBorder.removeFromSuperview()
+        thumbnailBorder.removeFromSuperview()
         
         if let _hole = self.transparentHoleView {
             // Ensures to use the current background color to set the filling color
@@ -452,7 +533,7 @@ public class ViewWithCutout: UIView {
             outlineBorder = UIView()
             outlineBorder.backgroundColor = UIColor.clear
             outlineBorder.layer.borderWidth = 1
-            outlineBorder.layer.borderColor = UIColor.white.cgColor
+            outlineBorder.layer.borderColor = UIColor.gray.cgColor
             outlineBorder.frame = CGRect(x: _hole.frame.origin.x - 1, y: _hole.frame.origin.y - 1, width: _hole.frame.size.width + 2, height: _hole.frame.size.height + 2)
             
             self.addSubview(outlineBorder)
@@ -463,7 +544,6 @@ public class ViewWithCutout: UIView {
         super.layoutSubviews()
     }
     
-    // MARK: - Initialization
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

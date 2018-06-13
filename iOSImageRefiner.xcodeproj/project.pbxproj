@@ -10,14 +10,17 @@
 		022B924BF68FB597368A82D9 /* Pods_iOSImageRefinerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC0F88FC597045EC82A41E38 /* Pods_iOSImageRefinerUITests.framework */; };
 		5C2A1C13B9AE95F916652361 /* Pods_iOSImageRefiner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C872EE3540E9CF85648CE3E3 /* Pods_iOSImageRefiner.framework */; };
 		7AFCACB6D874E33127594D2B /* Pods_iOSImageRefinerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1E5C07C68DED0DB60DA0177 /* Pods_iOSImageRefinerTests.framework */; };
+		9E7F5D0A20C78A88000FB172 /* ImageRefinerOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7F5D0920C78A88000FB172 /* ImageRefinerOptionsViewController.swift */; };
+		9E7F5D0C20CC2AA8000FB172 /* ImageRefinerOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7F5D0B20CC2AA8000FB172 /* ImageRefinerOptions.swift */; };
+		9E7F5D0E20D0C58B000FB172 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E7F5D0D20D0C58B000FB172 /* Images.xcassets */; };
 		9E9A64FE20BF96740003752F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A64FD20BF96740003752F /* AppDelegate.swift */; };
 		9E9A650820BF96770003752F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A650620BF96770003752F /* LaunchScreen.storyboard */; };
 		9E9A651320BF96770003752F /* iOSImageRefinerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A651220BF96770003752F /* iOSImageRefinerTests.swift */; };
 		9E9A651E20BF96770003752F /* iOSImageRefinerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A651D20BF96770003752F /* iOSImageRefinerUITests.swift */; };
 		9E9A652E20BF96990003752F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A652B20BF96980003752F /* Main.storyboard */; };
-		9E9A653020BF96990003752F /* ImageEdit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A652D20BF96990003752F /* ImageEdit.xcassets */; };
-		9E9A653320BF97490003752F /* ImageEdit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A653120BF97490003752F /* ImageEdit.storyboard */; };
-		9E9A653420BF97490003752F /* ImageEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A653220BF97490003752F /* ImageEdit.swift */; };
+		9E9A653020BF96990003752F /* ImageRefiner.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A652D20BF96990003752F /* ImageRefiner.xcassets */; };
+		9E9A653320BF97490003752F /* ImageRefiner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E9A653120BF97490003752F /* ImageRefiner.storyboard */; };
+		9E9A653420BF97490003752F /* ImageRefinerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A653220BF97490003752F /* ImageRefinerViewController.swift */; };
 		9E9A653620BF98630003752F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9A653520BF98630003752F /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +44,9 @@
 /* Begin PBXFileReference section */
 		0D08E7A6DF28A20517622F5A /* Pods-iOSImageRefinerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSImageRefinerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSImageRefinerTests/Pods-iOSImageRefinerTests.release.xcconfig"; sourceTree = "<group>"; };
 		4D2738B4463A4A305B21B230 /* Pods-iOSImageRefinerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSImageRefinerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSImageRefinerTests/Pods-iOSImageRefinerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9E7F5D0920C78A88000FB172 /* ImageRefinerOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRefinerOptionsViewController.swift; sourceTree = "<group>"; };
+		9E7F5D0B20CC2AA8000FB172 /* ImageRefinerOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRefinerOptions.swift; sourceTree = "<group>"; };
+		9E7F5D0D20D0C58B000FB172 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9E9A64FA20BF96740003752F /* iOSImageRefiner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSImageRefiner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E9A64FD20BF96740003752F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E9A650720BF96770003752F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -52,9 +58,9 @@
 		9E9A651D20BF96770003752F /* iOSImageRefinerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSImageRefinerUITests.swift; sourceTree = "<group>"; };
 		9E9A651F20BF96770003752F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E9A652B20BF96980003752F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		9E9A652D20BF96990003752F /* ImageEdit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageEdit.xcassets; sourceTree = "<group>"; };
-		9E9A653120BF97490003752F /* ImageEdit.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ImageEdit.storyboard; sourceTree = "<group>"; };
-		9E9A653220BF97490003752F /* ImageEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEdit.swift; sourceTree = "<group>"; };
+		9E9A652D20BF96990003752F /* ImageRefiner.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageRefiner.xcassets; sourceTree = "<group>"; };
+		9E9A653120BF97490003752F /* ImageRefiner.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ImageRefiner.storyboard; sourceTree = "<group>"; };
+		9E9A653220BF97490003752F /* ImageRefinerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRefinerViewController.swift; sourceTree = "<group>"; };
 		9E9A653520BF98630003752F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B3121FB77A08AD9DC312CAC3 /* Pods-iOSImageRefiner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSImageRefiner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSImageRefiner/Pods-iOSImageRefiner.debug.xcconfig"; sourceTree = "<group>"; };
 		C872EE3540E9CF85648CE3E3 /* Pods_iOSImageRefiner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSImageRefiner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,14 +112,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		9E1D785120C35A98006F1BE9 /* ImageEdit */ = {
+		9E1D785120C35A98006F1BE9 /* ImageRefiner */ = {
 			isa = PBXGroup;
 			children = (
-				9E9A652D20BF96990003752F /* ImageEdit.xcassets */,
-				9E9A653120BF97490003752F /* ImageEdit.storyboard */,
-				9E9A653220BF97490003752F /* ImageEdit.swift */,
+				9E9A652D20BF96990003752F /* ImageRefiner.xcassets */,
+				9E9A653120BF97490003752F /* ImageRefiner.storyboard */,
+				9E7F5D0B20CC2AA8000FB172 /* ImageRefinerOptions.swift */,
+				9E7F5D0920C78A88000FB172 /* ImageRefinerOptionsViewController.swift */,
+				9E9A653220BF97490003752F /* ImageRefinerViewController.swift */,
 			);
-			path = ImageEdit;
+			path = ImageRefiner;
 			sourceTree = "<group>";
 		};
 		9E9A64F120BF96740003752F = {
@@ -141,7 +149,8 @@
 		9E9A64FC20BF96740003752F /* iOSImageRefiner */ = {
 			isa = PBXGroup;
 			children = (
-				9E1D785120C35A98006F1BE9 /* ImageEdit */,
+				9E7F5D0D20D0C58B000FB172 /* Images.xcassets */,
+				9E1D785120C35A98006F1BE9 /* ImageRefiner */,
 				9E9A64FD20BF96740003752F /* AppDelegate.swift */,
 				9E9A650620BF96770003752F /* LaunchScreen.storyboard */,
 				9E9A650920BF96770003752F /* Info.plist */,
@@ -286,10 +295,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E9A653320BF97490003752F /* ImageEdit.storyboard in Resources */,
+				9E7F5D0E20D0C58B000FB172 /* Images.xcassets in Resources */,
+				9E9A653320BF97490003752F /* ImageRefiner.storyboard in Resources */,
 				9E9A652E20BF96990003752F /* Main.storyboard in Resources */,
 				9E9A650820BF96770003752F /* LaunchScreen.storyboard in Resources */,
-				9E9A653020BF96990003752F /* ImageEdit.xcassets in Resources */,
+				9E9A653020BF96990003752F /* ImageRefiner.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,8 +382,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E9A653620BF98630003752F /* ViewController.swift in Sources */,
-				9E9A653420BF97490003752F /* ImageEdit.swift in Sources */,
+				9E9A653420BF97490003752F /* ImageRefinerViewController.swift in Sources */,
+				9E7F5D0A20C78A88000FB172 /* ImageRefinerOptionsViewController.swift in Sources */,
 				9E9A64FE20BF96740003752F /* AppDelegate.swift in Sources */,
+				9E7F5D0C20CC2AA8000FB172 /* ImageRefinerOptions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -231,7 +231,6 @@ public class ImageRefinerViewController:
         }
         
         if let _image = self.image {
-            
             if let _scaledImage = scaleImage(image: _image, scaleFactor: imageScale) {
                 let crop = CGRect(x: cropX,
                                   y: cropY,
@@ -346,11 +345,12 @@ public class ImageRefinerViewController:
             self.thumbnailView.image = nil
             self.thumbnailView.alpha = 0
             self.generateThumbnailTimer.invalidate()
-            self.generateThumbnailTimer = Timer.scheduledTimer(timeInterval: 0.2,
-                                                               target: self,
-                                                               selector: #selector(ImageRefinerViewController.generateThumbnail),
-                                                               userInfo: nil,
-                                                               repeats: false)
+            self.generateThumbnailTimer = Timer.scheduledTimer(
+                timeInterval: 0.2,
+                target: self,
+                selector: #selector(ImageRefinerViewController.generateThumbnail),
+                userInfo: nil,
+                repeats: false)
         }
     }
     

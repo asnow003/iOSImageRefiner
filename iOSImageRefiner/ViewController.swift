@@ -76,7 +76,7 @@ class ViewController: UIViewController,
             
             if let _imageRefiner = storyboard.instantiateViewController(withIdentifier: ImageRefinerViewController.storyboardName) as? ImageRefinerViewController {
                 
-                _imageRefiner.imageOptions = ImageRefinerOptions(
+                _imageRefiner.options = ImageRefinerOptions(
                     cropWidth: 240,
                     cropHeight: 240)
 

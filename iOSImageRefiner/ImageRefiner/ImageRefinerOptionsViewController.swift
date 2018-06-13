@@ -81,7 +81,7 @@ public class ImageRefinerOptionsViewController: UITableViewController {
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let refiner = segue.destination as? ImageRefinerViewController {
-            refiner.imageOptions = self.options
+            refiner.options = self.options
         }
     }
 }

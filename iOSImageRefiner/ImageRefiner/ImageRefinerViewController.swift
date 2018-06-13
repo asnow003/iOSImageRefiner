@@ -16,26 +16,43 @@ public enum ImageRefinerQuality: Int {
 }
 
 public protocol ImageRefinerDelegate: class {
+    /// Returns the refined image information
+    ///
+    /// - Parameters:
+    ///   - image: Refined result image
+    ///   - thumbnail: Thumbnail results from the refined image
+    ///   - scaleFactor: Scale factor for the refined image
     func imageUpdated(image: UIImage, thumbnail: UIImage?, scaleFactor: Int)
 }
 
-public class ImageRefinerViewController: UIViewController, UIScrollViewDelegate, ImageRefinerOptionsDelegate, UIGestureRecognizerDelegate {
+/// Image refiner storyboard view controller
+/// Allow for cropping and resizing of a given image
+public class ImageRefinerViewController:
+    UIViewController,
+    UIScrollViewDelegate,
+    ImageRefinerOptionsDelegate {
     
+    /// Name of the storyboard associated with this ViewController
     public static let storyboardName: String = "ImageRefiner"
     
+    /// Image refiner delegate
     public weak var delegate: ImageRefinerDelegate?
     
+    /// Image to be edited by the refiner
     public var image: UIImage?
-    public var imageOptions: ImageRefinerOptions? {
+    
+    /// Options that can be set for the refiner
+    public var options: ImageRefinerOptions? {
         didSet {
-            self.imageCropHeight = imageOptions?.cropHeight ?? self.imageCropHeight
-            self.imageCropWidth = imageOptions?.cropWidth ?? self.imageCropWidth
-            self.imageScaleFactor = imageOptions?.quality ?? self.imageScaleFactor
-            self.thumbWidthHeight = imageOptions?.thumbWidthHeight ?? self.thumbWidthHeight
-            self.thumbQuality = imageOptions?.thumbQuality ?? self.thumbQuality
+            self.imageCropHeight = options?.cropHeight ?? self.imageCropHeight
+            self.imageCropWidth = options?.cropWidth ?? self.imageCropWidth
+            self.imageScaleFactor = options?.quality ?? self.imageScaleFactor
+            self.thumbWidthHeight = options?.thumbWidthHeight ?? self.thumbWidthHeight
+            self.thumbQuality = options?.thumbQuality ?? self.thumbQuality
         }
     }
     
+    ///
     public var buttonColor: UIColor = UIColor.white
     public var showThumbnailPreview: Bool = true
     public var showEditOptionsButton: Bool = true
@@ -101,9 +118,6 @@ public class ImageRefinerViewController: UIViewController, UIScrollViewDelegate,
         self.okButton.imageView!.tintColor = self.buttonColor
         self.cancelButton.imageView!.tintColor = self.buttonColor
         self.editOptionsButton.imageView!.tintColor = self.buttonColor
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        self.imagePinchZoomScroll.addGestureRecognizer(tap)
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -133,7 +147,7 @@ public class ImageRefinerViewController: UIViewController, UIScrollViewDelegate,
     }
     
     public func optionsUpdated(options: ImageRefinerOptions) {
-        self.imageOptions = options
+        self.options = options
         if let _image = self.image {
             self.loadImage(image: _image)
         }
@@ -310,13 +324,6 @@ public class ImageRefinerViewController: UIViewController, UIScrollViewDelegate,
             self.imageView.alpha = 1
         }
     }
-
-    @objc public func handleTap(_ touch: UITapGestureRecognizer) {
-        if touch.state == UIGestureRecognizerState.recognized
-        {
-            print(touch.location(in: touch.view))
-        }
-    }
     
     private func setCropFocus(x: CGFloat, y: CGFloat) {
         self.imageCropFocusX = x
@@ -474,7 +481,7 @@ public class ImageRefinerViewController: UIViewController, UIScrollViewDelegate,
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let _nav = segue.destination as? UINavigationController,
             let _editor = _nav.topViewController as? ImageRefinerOptionsViewController,
-            let _options = self.imageOptions {
+            let _options = self.options {
             _editor.delegate = self
             _editor.options = _options
         }

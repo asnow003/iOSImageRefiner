@@ -9,12 +9,18 @@
 import UIKit
 import ImageIO
 
+/// Types of image quality
+///
+/// - standard: 1x support
+/// - high: 2x support
+/// - retina: 3x support retina
 public enum ImageRefinerQuality: Int {
     case standard = 1
     case high = 2
     case retina = 3
 }
 
+/// Image refiner delegate
 public protocol ImageRefinerDelegate: class {
     /// Returns the refined image information
     ///
@@ -52,9 +58,14 @@ public class ImageRefinerViewController:
         }
     }
     
-    ///
+    /// Tint color for the action buttons
     public var buttonColor: UIColor = UIColor.white
+    
+    /// Show the thumbnail preview image while editing
     public var showThumbnailPreview: Bool = true
+    
+    /// Show the edit option button that allows user make changes
+    /// to the defaults set
     public var showEditOptionsButton: Bool = true
     
     private var imageCropWidth: CGFloat = 200

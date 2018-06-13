@@ -9,44 +9,29 @@
 import UIKit
 import Foundation
 
+/// Image options ViewController delegate
 public protocol ImageRefinerOptionsDelegate: class {
     func optionsUpdated(options: ImageRefinerOptions)
 }
 
+/// Image options ViewController
 public class ImageRefinerOptionsViewController: UITableViewController {
     
     @IBOutlet weak var heightOptionTextbox: UITextField!
     @IBOutlet weak var widthOptionTextbox: UITextField!
     @IBOutlet weak var qualityOptionChoice: UISegmentedControl!
     
+    /// Image refiner options to be updated
     public var options: ImageRefinerOptions = ImageRefinerOptions()
+    
+    /// Image refiner delegate
     public var delegate: ImageRefinerOptionsDelegate?
-    
-    public override func viewDidLoad() {
-        self.heightOptionTextbox.text = String(describing: options.cropHeight)
-        self.widthOptionTextbox.text = String(describing: options.cropWidth)
-        
-        self.qualityOptionChoice.selectedSegmentIndex = options.quality.rawValue - 1
-    }
-    
-    private func stringToDimension(value: String?) -> CGFloat? {
-        if let _value = value,
-            let n = NumberFormatter().number(from: _value) {
-            return CGFloat(truncating: n)
-        }
-        
-        return nil
-    }
-    
-    @IBAction func CancelButtonClick(_ sender: Any) {
-        self.navigationController?.dismiss(animated: true, completion: nil)
-    }
     
     @IBAction func DoneButtonClick(_ sender: Any) {
         
         if let _delegate = self.delegate {
             var optionsChanged = false
-
+            
             // check width option
             if let _width = self.stringToDimension(value: self.widthOptionTextbox.text) {
                 if _width != self.options.cropWidth &&
@@ -79,6 +64,26 @@ public class ImageRefinerOptionsViewController: UITableViewController {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func CancelButtonClick(_ sender: Any) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    public override func viewDidLoad() {
+        self.heightOptionTextbox.text = String(describing: options.cropHeight)
+        self.widthOptionTextbox.text = String(describing: options.cropWidth)
+        
+        self.qualityOptionChoice.selectedSegmentIndex = options.quality.rawValue - 1
+    }
+    
+    private func stringToDimension(value: String?) -> CGFloat? {
+        if let _value = value,
+            let n = NumberFormatter().number(from: _value) {
+            return CGFloat(truncating: n)
+        }
+        
+        return nil
+    }
+
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let refiner = segue.destination as? ImageRefinerViewController {
             refiner.options = self.options

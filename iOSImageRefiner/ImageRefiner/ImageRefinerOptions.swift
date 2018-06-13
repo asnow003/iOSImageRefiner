@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 
+/// Optional values to configure the imaged editing experience
 public class ImageRefinerOptions {
     public var cropWidth: CGFloat
     public var cropHeight: CGFloat

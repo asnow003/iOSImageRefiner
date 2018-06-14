@@ -32,11 +32,14 @@ Open your project iOS project workspace (.xcworkspace)
 ### Manually
 You can manually add the files to your Xcode project by copying the following items from this repo.
 
-Copy all the items in the Image Edit folder in the repo into your project.  The following files should be included:
+Copy all the items in the Image Edit folder in the repo into your project.  The following files should be included in the sample project above:
 
- - ImageEdit.xcassets
- - ImageEdit.storyboard
- - ImageEdit.swift
+Folder ImageRefiner:
+ - ImageRefiner.xcassets
+ - ImageRefiner.storyboard
+ - ImageRefinerViewController.swift
+ - ImageRefinerOptions.swift
+ - ImageRefinerOptionsViewController.swift
 
 ## Samples
 

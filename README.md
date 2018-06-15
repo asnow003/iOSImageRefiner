@@ -82,14 +82,18 @@ class ViewController: UIViewController,ImageEditDelegate {}
 
 Display the image editor ViewController:
 ```
-let storyboard = UIStoryboard(name: "ImageEdit", bundle: nil)
+let storyboard = UIStoryboard(name: ImageRefinerViewController.storyboardName, bundle: nil)
+            
+if let _imageRefiner = storyboard.instantiateViewController(withIdentifier: ImageRefinerViewController.storyboardName) as? ImageRefinerViewController {
+                
+	_imageRefiner.options = ImageRefinerOptions(
+	    cropWidth: 240,
+	    cropHeight: 240)
 
-if let _imageEdit = storyboard.instantiateViewController(withIdentifier: "ImageEdit") as? ImageEdit {
-	_imageEdit.image = imageToEdit
-	_imageEdit.imageCropWidth = 240
-	_imageEdit.imageCropHeight = 240
-	_imageEdit.delegate = self
-	self.present(_imageEdit, animated: true, completion: nil)
+	_imageRefiner.delegate = self
+	_imageRefiner.image = {your UIImage to edit}
+
+	self.present(_imageRefiner, animated: true, completion: nil)
 }
 ```
 Add the delegates:

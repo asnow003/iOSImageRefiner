@@ -71,5 +71,5 @@ if let _imageRefiner = storyboard.instantiateViewController(withIdentifier: Imag
 ```
 Add the delegates:
 ```
-public func imageEdited(image: UIImage, thumbnail: UIImage?, scaleFactor: Int) {}
+public func imageUpdated(image: UIImage, thumbnail: UIImage?, scaleFactor: Int) {}
 ```

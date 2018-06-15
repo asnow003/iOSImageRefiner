@@ -43,37 +43,10 @@ Folder ImageRefiner:
 
 ## Samples
 
-### Cocoapods Usage
-When including the cocoapods in your project use the following code snippets.
-
 Add the following to your calling ViewController:
 ```
 import iOSImageRefiner
 ```
-Add the delegate reference:
-```
-class ViewController: UIViewController,ImageEditDelegate {}
-```
-Display the image editor ViewController:
-```
-let bundle = Bundle(for: ImageEdit.self)
-let storyboard = UIStoryboard(name: "ImageEdit", bundle: bundle)
-
-if let _imageEdit = storyboard.instantiateViewController(withIdentifier: "ImageEdit") as? ImageEdit {
-	_imageEdit.image = imageToEdit
-	_imageEdit.imageCropWidth = 240
-	_imageEdit.imageCropHeight = 240
-	_imageEdit.delegate = self
-	self.present(_imageEdit, animated: true, completion: nil)
-}
-```
-
-Add the delegates:
-```
-public func imageEdited(image: UIImage, thumbnail: UIImage?, scaleFactor: Int) {}
-```
-### Copy Usage
-When copying from this repo and placing in your own project.
 
 Add the delegate reference:
 ```
